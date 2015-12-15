@@ -1,0 +1,41 @@
+<h1>New Wing Order</h1>
+
+<%= form_for(@wing_order) do |f| %>
+    <div class="field">
+      <%= f.label "Full Name" %>
+      <%= f.text_field :customer_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :city %>
+      <%= f.text_field :city %>
+    </div>
+
+    <div class="field">
+      <%= f.label :state %>
+      <%= f.select :state, @state_collection%>
+    </div>
+
+    <div class="field">
+      <%= f.label :quantity %>
+      <% @quantity_collection.each do |num| %>
+        <%= f.radio_button :quantity, num.first %> <%= num.last%></br>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= check_box_tag(:ranch_dressing) %>
+      <%= label_tag(:ranch_dressing, "Add Ranch Dressing") %> <br />
+    </div>
+
+    <div class="field">
+      <%= f.label "Flavors" %>
+      <!-- collection_check_boxes(object, method, collection, value_method, text_method) -->
+      <%= collection_check_boxes(:wing_order, :flavor_ids, @flavor_collection, :id, :name) %>
+    </div>
+
+
+    <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
